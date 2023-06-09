@@ -1,0 +1,147 @@
+{
+    "type": "origins:multiple",
+    "name": "Haematomania",
+    "description": "Although you feed off of flowers, you must also consume blood to stay alive. You have a meter that slowly depletes over the course of 30 minutes. Suck blood out of any living entity to recharge it partially, or die quickly when the meter hits 0. You're able to store blood in bottles for later use.",
+
+    "suck_blood": {
+        "type": "origins:action_on_entity_use",
+        "hud_render": {
+            "should_render": false
+        },
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:sneaking"
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "*:*_blood_level",
+                    "comparison": "<",
+                    "compare_to": 1700
+                }
+            ]
+        },
+        "bientity_action": {
+            "type": "origins:actor_action",
+            "action": {
+                "type": "origins:raycast",
+                "distance": 5,
+                "shape_type": "collider",
+                "fluid_handling": "none",
+                "hit_action": {
+                    "type": "origins:if_else",
+                    "condition": {
+                        "type": "origins:equipped_item",
+                        "equipment_slot": "mainhand",
+                        "item_condition": {
+                            "type": "origins:ingredient",
+                            "ingredient": {
+                                "item": "minecraft:glass_bottle"
+                            }
+                        }
+                    },
+                    "if_action": {
+                        "type": "origins:and",
+                        "actions": [
+                            {
+                                "type": "origins:equipped_item_action",
+                                "equipment_slot": "mainhand",
+                                "action": {
+                                    "type": "origins:consume",
+                                    "amount": 1
+                                }
+                            },
+                            {
+                                "type": "origins:give",
+                                "stack": {
+                                    "item": "minecraft:potion",
+                                    "tag": "{HideFlags:32,CustomPotionColor:10682376,display:{Name:'{\"text\":\"Blood\",\"bold\":true,\"color\":\"red\",\"italic\":false}',Lore:['{\"text\":\"Fresh blood which was sucked out of a living Entity\",\"color\":\"gray\"}']}}"
+                                }
+                            }
+                        ]
+                    },
+                    "else_action": {
+                        "type": "origins:change_resource",
+                        "resource": "*:*_blood_level",
+                        "change": 360
+                    }
+                },
+                "bientity_action": {
+                    "type": "origins:target_action",
+                    "action": {
+                        "type": "origins:damage",
+                        "amount": 2,
+                        "damage_type": "minecraft:generic"
+                    }
+                }
+            }
+        }
+    },
+
+    "drink_blood": {
+        "type": "origins:action_on_item_use",
+        "item_condition": {
+            "type": "origins:nbt",
+            "nbt": "{HideFlags:32,CustomPotionColor:10682376,display:{Name:'{\"text\":\"Blood\",\"bold\":true,\"color\":\"red\",\"italic\":false}',Lore:['{\"text\":\"Fresh blood which was sucked out of a living Entity\",\"color\":\"gray\"}']}}"
+        },
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "*:*_blood_level",
+            "change": 360
+        }
+    },
+
+
+    "damage_on_zero": {
+        "type": "origins:action_over_time",
+        "interval": 10,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "*:*_blood_level",
+            "comparison": "==",
+            "compare_to": 0
+        },
+        "entity_action": {
+            "type": "origins:damage",
+            "amount": 2,
+            "damage_type": "minecraft:dry_out"
+        }
+    },
+
+
+    "blood_level": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 1800,
+        "start_value": 1800,
+        "hud_render": {
+            "should_render": true,
+            "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_01.png",
+            "bar_index": 5
+        }
+    },
+
+
+    "decrease_blood_level": {
+        "type": "origins:action_over_time",
+        "interval": 20,
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "*:*_blood_level",
+            "operation": "add",
+            "change": -1
+        }
+    },
+
+
+    "recharge_on_respawn": {
+        "type": "origins:action_on_callback",
+        "entity_action_respawned": {
+            "type": "origins:change_resource",
+            "resource": "*:*_blood_level",
+            "operation": "set",
+            "change": 1800
+        }
+    }
+}

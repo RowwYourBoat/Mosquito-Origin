@@ -1,0 +1,105 @@
+{
+    "type": "origins:multiple",
+    "name": "Fragile Wings",
+    "description": "Your wings allow you to fly for short periods of time. Melee damage gets reduced significantly while airborn. You can't fly while in rain.",
+    "activation": {
+        "type": "origins:active_self",
+        "cooldown": 0,
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:in_rain",
+                    "inverted": true
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "*:*_flight_cooldown",
+                    "comparison": "==",
+                    "compare_to": 0
+                }
+            ]
+        },
+        "key": {
+            "key": "key.origins.primary_active"
+        },
+        "hud_render": {
+            "should_render": false
+        },
+        "entity_action": {
+            "type": "origins:trigger_cooldown",
+            "power": "*:*_flight_duration"
+        }
+    },
+
+
+    "damage_reduction_during_flight": {
+        "type": "origins:modify_damage_dealt",
+        "hidden": true,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "*:*_flight_duration",
+            "comparison": ">",
+            "compare_to": 0
+        },
+        "modifier": {
+            "operation": "multiply_base_multiplicative",
+            "value": -0.75
+        }
+    },
+
+
+    "creative_flight": {
+        "type": "origins:creative_flight",
+        "hidden": true,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "*:*_flight_duration",
+            "comparison": ">",
+            "compare_to": 0
+        }
+    },
+
+
+    "flight_duration": {
+        "type": "origins:cooldown",
+        "cooldown": 200,
+        "hidden": true,
+        "hud_render": {
+            "should_render": true,
+            "inverted": true,
+            "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_03.png",
+            "bar_index": 23
+        }
+    },
+
+
+    "flight_cooldown": {
+        "type": "origins:cooldown",
+        "cooldown": 1200,
+        "hidden": true,
+        "hud_render": {
+            "should_render": true,
+            "inverted": true,
+            "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_03.png",
+            "bar_index": 9
+        }
+    },
+
+
+    "flight_cooldown_trigger": {
+        "type": "origins:action_over_time",
+        "interval": 1,
+        "hidden": true,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "*:*_flight_duration",
+            "comparison": "==",
+            "compare_to": 1
+        },
+        "rising_action": {
+            "type": "origins:trigger_cooldown",
+            "power": "*:*_flight_cooldown"
+        }
+    }
+}

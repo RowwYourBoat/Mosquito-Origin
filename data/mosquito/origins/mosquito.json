@@ -1,0 +1,15 @@
+{
+    "powers": [
+        "mosquito:fragile-wings",
+        "mosquito:tipped-proboscis",
+        "mosquito:grappling-tarsus",
+        "mosquito:fragile-body",
+        "mosquito:naturally-sized",
+        "mosquito:plant-based-diet",
+        "mosquito:haematomania"
+    ],
+    "name": "Mosquito",
+    "description": "Bzzzz..",
+    "impact": 3,
+    "icon": "minecraft:pointed_dripstone"
+}

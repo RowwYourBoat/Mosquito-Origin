@@ -1,0 +1,19 @@
+{
+    "type": "origins:target_action_on_hit",
+    "name": "Tipped Proboscis",
+    "description": "Your mouth is equipped with a deadly venom which may only be inflicted during flight, without an item equipped.",
+    "condition": {
+        "type": "origins:resource",
+        "resource": "mosquito:fragile-wings_flight_duration",
+        "comparison": ">",
+        "compare_to": 0
+    },
+    "entity_action": {
+        "type": "origins:apply_effect",
+        "effect": {
+            "effect": "minecraft:poison",
+            "duration": 110,
+            "amplifier": 1
+        }
+    }
+}

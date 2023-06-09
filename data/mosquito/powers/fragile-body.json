@@ -1,0 +1,12 @@
+{
+    "type": "origins:attribute",
+    "name": "Fragile Body",
+    "description": "Your body isn't able to withstand much, resulting in you having very few hearts.",
+    "update_health": true,
+    "modifier": {
+        "name": "Mosquito Max Health Decrease",
+        "attribute": "minecraft:generic.max_health",
+        "operation": "addition",
+        "value": -12
+    }
+}

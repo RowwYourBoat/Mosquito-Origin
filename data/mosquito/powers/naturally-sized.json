@@ -1,0 +1,60 @@
+{
+    "type": "origins:multiple",
+    "name": "Naturally Sized",
+    "description": "You're a lot smaller than usual. The Nether is off limits to you, as your small surface area causes you to heat up quickly.",
+    "resize_on_spawn": {
+        "type": "origins:action_on_callback",
+        "entity_action_added": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:execute_command",
+                    "command": "scale set pehkui:width .05"
+                },
+                {
+                    "type": "origins:execute_command",
+                    "command": "scale set pehkui:height .05"
+                },
+                {
+                    "type": "origins:execute_command",
+                    "command": "scale set pehkui:reach .75"
+                },
+                {
+                    "type": "origins:execute_command",
+                    "command": "scale set pehkui:jump_height .5"
+                },
+                {
+                    "type": "origins:execute_command",
+                    "command": "scale set pehkui:knockback .5"
+                },
+                {
+                    "type": "origins:execute_command",
+                    "command": "scale set pehkui:hitbox_width 3"
+                },
+                {
+                    "type": "origins:execute_command",
+                    "command": "scale set pehkui:hitbox_height 1.2"
+                },
+                {
+                    "type": "origins:execute_command",
+                    "command": "scale set pehkui:drops .1"
+                }
+            ]
+        }
+    },
+
+    
+    "burn_in_nether": {
+        "type": "origins:action_over_time",
+        "hidden": true,
+        "interval": 20,
+        "condition": {
+            "type": "origins:dimension",
+            "dimension": "minecraft:the_nether"
+        },
+        "entity_action": {
+            "type": "origins:set_on_fire",
+            "duration": 20
+        }
+    }
+}

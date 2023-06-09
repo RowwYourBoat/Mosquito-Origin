@@ -1,0 +1,38 @@
+{
+    "type": "origins:climbing",
+    "name": "Grappling Tarsus",
+    "description": "Your feet have small hooks on them, allowing you to climb and hold onto walls.",
+    "allow_holding": true,
+    "condition": {
+      "type": "origins:or",
+      "conditions": [
+          {
+            "type": "origins:block_collision",
+            "offset_x": 0.01,
+            "offset_z": 0.01,
+            "offset_y": 0.01
+          },
+          {
+            "type": "origins:block_collision",
+            "offset_x": -0.01,
+            "offset_z": -0.01
+          }
+      ]
+    },
+    "hold_condition": {
+      "type": "origins:or",
+      "conditions": [
+          {
+            "type": "origins:block_collision",
+            "offset_x": 0.01,
+            "offset_z": 0.01,
+            "offset_y": 0.01
+          },
+          {
+            "type": "origins:block_collision",
+            "offset_x": -0.01,
+            "offset_z": -0.01
+          }
+      ]
+    }
+}
